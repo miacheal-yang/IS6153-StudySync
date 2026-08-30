@@ -1,0 +1,172 @@
+{% from "partials/topbar.html" import shared_topbar %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasks | StudyTrackr</title>
+    <link rel="stylesheet" href="../static/css/style.css?v=studytrackr-ui-20260416" />
+  </head>
+  <body>
+    <main class="dashboard-page">
+      <div class="app-frame">
+        <section id="tasksPageRoot" class="dashboard-shell task-list-shell" data-view="{{ task_view|default('tasks') }}">
+          {% call shared_topbar() %}
+            <p class="app-page-subtitle">Task List</p>
+          {% endcall %}
+
+          <div class="task-view-switch">
+            <button
+              type="button"
+              id="taskViewMenuBtn"
+              class="task-view-menu-btn"
+              aria-label="Select task view"
+              aria-haspopup="menu"
+              aria-expanded="false"
+              aria-controls="taskViewMenu"
+            >
+              <span class="task-view-menu-icon" aria-hidden="true">⋮</span>
+            </button>
+            <div id="taskViewMenu" class="task-view-menu hidden" role="menu" aria-label="Select task view">
+              <button
+                type="button"
+                class="task-view-menu-item {% if task_view|default('tasks') == 'tasks' %}active{% endif %}"
+                data-view="tasks"
+                data-target="/tasks?view=tasks"
+                role="menuitem"
+              >
+                Tasks
+              </button>
+              <button
+                type="button"
+                class="task-view-menu-item {% if task_view|default('tasks') == 'calendar' %}active{% endif %}"
+                data-view="calendar"
+                data-target="/tasks?view=calendar"
+                role="menuitem"
+              >
+                Calendar
+              </button>
+            </div>
+          </div>
+
+          {% if task_view|default('tasks') == 'tasks' %}
+          <div class="task-list-filters" role="tablist" aria-label="Task filters">
+            <button type="button" class="task-filter-tab task-filter-tab--on" data-filter="all" role="tab" aria-selected="true">
+              All
+            </button>
+            <button type="button" class="task-filter-tab" data-filter="pending" role="tab" aria-selected="false">Pending</button>
+            <button type="button" class="task-filter-tab" data-filter="done" role="tab" aria-selected="false">Done</button>
+            <button type="button" class="task-filter-tab" data-filter="overdue" role="tab" aria-selected="false">Overdue</button>
+            <button type="button" class="task-add-fab" id="openAddTaskModal" aria-label="Add task">+</button>
+          </div>
+
+          <div id="taskList" class="task-list" aria-live="polite"></div>
+          <p id="taskListEmpty" class="task-list-empty hidden">No tasks in this view.</p>
+          <p class="task-list-swipe-hint"><em>Swipe left to mark complete</em></p>
+          {% else %}
+          <section id="taskCalendarView" class="task-calendar-view" aria-live="polite">
+            <div class="task-calendar-week-header" id="taskCalendarWeekHeader"></div>
+            <div class="task-calendar-week-grid" id="taskCalendarWeekGrid"></div>
+
+            <div class="task-calendar-legend">
+              <span class="task-calendar-legend-item">
+                <span class="task-calendar-legend-dot study"></span>
+                Study session
+              </span>
+              <span class="task-calendar-legend-item">
+                <span class="task-calendar-legend-dot deadline"></span>
+                Deadline
+              </span>
+            </div>
+
+            <h3 id="taskCalendarSelectedDate" class="task-calendar-selected-date"></h3>
+
+            <article id="taskCalendarDayCard" class="task-calendar-day-card">
+              <p id="taskCalendarDayCardTitle" class="task-calendar-day-card-title">No tasks due on this day.</p>
+              <p id="taskCalendarDayCardMeta" class="task-calendar-day-card-meta">Tap a different date.</p>
+            </article>
+
+            <button type="button" id="taskCalendarAddSessionBtn" class="task-calendar-add-session-btn">
+              + Add session for this day
+            </button>
+          </section>
+          {% endif %}
+        </section>
+        <nav class="bottom-nav">
+          <a class="bottom-nav-item" data-path="/dashboard" href="/dashboard">Home</a>
+          <a class="bottom-nav-item active" data-path="/tasks" href="/tasks">Tasks</a>
+          <a class="bottom-nav-item" data-path="/log" href="/log" aria-label="Log">Log</a>
+          <a class="bottom-nav-item" data-path="/analytics" href="/analytics">Analytics</a>
+          <a class="bottom-nav-item" data-path="/profile" href="/profile">Profile</a>
+        </nav>
+      </div>
+    </main>
+
+    {% if task_view|default('tasks') == 'tasks' %}
+    <div id="taskAddModal" class="task-add-modal hidden" aria-hidden="true">
+      <div class="task-add-modal__backdrop" id="taskAddModalBackdrop"></div>
+      <div class="task-add-modal__panel" role="dialog" aria-modal="true" aria-labelledby="taskAddModalTitle">
+        <div class="task-add-modal__header">
+          <div class="task-add-modal__brand">
+            <img src="../static/images/log.jpeg" alt="StudySync logo" class="task-add-modal__logo" width="28" height="28" />
+            <p class="task-add-modal__brand-line">
+              <span class="task-add-modal__brand-name">StudySync</span>
+              <span class="task-add-modal__brand-sep" aria-hidden="true">·</span>
+              <span id="taskAddModalTitle" class="task-add-modal__title">Add task</span>
+            </p>
+          </div>
+          <button type="button" class="task-add-modal__close" id="closeAddTaskModal" aria-label="Close">×</button>
+        </div>
+        <article class="panel task-form-panel">
+          <form id="taskCreateForm" novalidate>
+            <label for="taskSubject" class="task-form-label">Subject</label>
+            <div class="task-subject-wrap">
+              <input
+                id="taskSubject"
+                name="subject"
+                type="text"
+                class="task-form-input task-subject-combo"
+                list="taskSubjectDatalist"
+                placeholder="Select or type a subject"
+                autocomplete="off"
+              />
+              <datalist id="taskSubjectDatalist"></datalist>
+            </div>
+
+            <label for="taskTitle" class="task-form-label">Task name</label>
+            <input id="taskTitle" name="title" class="task-form-input" placeholder="e.g. Easy draft" required />
+
+            <label for="taskDeadline" class="task-form-label">Deadline</label>
+            <input id="taskDeadline" name="deadline" type="date" class="task-form-input" placeholder="dd / mm / yyyy" />
+
+            <p class="task-form-label">Priority</p>
+            <div class="task-priority-row">
+              <button type="button" class="task-priority-btn low active" data-priority="low">Low</button>
+              <button type="button" class="task-priority-btn medium" data-priority="medium">Medium</button>
+              <button type="button" class="task-priority-btn high" data-priority="high">High</button>
+              <button type="button" class="task-priority-btn urgent" data-priority="urgent">Urgent</button>
+            </div>
+
+            <label for="taskDescription" class="task-form-label">Notes (optional)</label>
+            <textarea
+              id="taskDescription"
+              name="description"
+              class="task-form-textarea"
+              rows="4"
+              placeholder="Add notes here"
+            ></textarea>
+
+            <p id="taskFormError" class="error-text"></p>
+            <button id="saveTaskBtn" type="submit" class="task-save-btn">Save task</button>
+          </form>
+        </article>
+      </div>
+    </div>
+    {% endif %}
+
+    <script src="../static/js/runtime-env.js"></script>
+    <script src="../static/js/auth-gate.js"></script>
+    <script src="../static/js/tasks.js"></script>
+    <script src="../static/js/bottom-nav.js"></script>
+  </body>
+</html>

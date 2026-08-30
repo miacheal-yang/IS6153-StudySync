@@ -1,0 +1,11 @@
+{# Shared main top bar (home-header). Use {% call shared_topbar() %}...subtitle...{% endcall %}
+   Logo path is relative so Flask routes and opening templates/*.html both resolve static files. #}
+{% macro shared_topbar() -%}
+<header class="home-header app-shared-topbar">
+  <img src="../static/images/log.jpeg" alt="StudySync logo" class="home-logo" />
+  <div class="home-title-wrap">
+    <h1 class="home-brand">StudySync</h1>
+    {{ caller() }}
+  </div>
+</header>
+{%- endmacro %}

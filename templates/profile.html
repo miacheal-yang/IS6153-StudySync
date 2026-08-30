@@ -1,0 +1,89 @@
+{% from "partials/topbar.html" import shared_topbar %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile | StudyTrackr</title>
+    <link rel="stylesheet" href="../static/css/style.css?v=studytrackr-ui-20260416" />
+  </head>
+  <body>
+    <main class="dashboard-page">
+      <div class="app-frame">
+      <section class="dashboard-shell">
+        {% call shared_topbar() %}
+          <p class="app-page-subtitle">Profile</p>
+        {% endcall %}
+
+        <div class="top-actions">
+        </div>
+
+        <article class="panel profile-panel">
+          <h1>Profile</h1>
+          <section class="profile-card">
+            <div id="avatarView" class="avatar-circle" aria-label="Profile avatar"></div>
+            <div class="profile-main">
+              <div id="profileView">
+                <h2 id="profileName">-</h2>
+                <p id="profileMajor" class="subtle-text"></p>
+                <p id="profileSemester" class="subtle-text"></p>
+                <button id="editProfileBtn" type="button" class="btn-primary">Edit Profile</button>
+              </div>
+
+              <form id="profileEditForm" class="hidden">
+                <label for="fullNameInput">Full Name</label>
+                <input id="fullNameInput" type="text" />
+                <label for="majorInput">Major</label>
+                <input id="majorInput" type="text" />
+                <label for="semesterInput">Current Semester</label>
+                <input id="semesterInput" type="text" />
+                <label for="avatarFileInput">Avatar Image</label>
+                <input id="avatarFileInput" type="file" accept="image/*" />
+                <div class="profile-edit-actions">
+                  <button id="saveProfileBtn" type="submit" class="btn-primary">Save</button>
+                  <button id="cancelProfileBtn" type="button" class="btn-light">Cancel</button>
+                </div>
+              </form>
+              <p id="profileMessage" class="subtle-text"></p>
+            </div>
+          </section>
+
+          <section class="settings-list">
+            <button class="setting-item" id="notificationSettingBtn" type="button">Notification Settings</button>
+            <div id="notificationSettingPanel" class="setting-panel hidden">
+              <label for="defaultReminderSelect">Default reminder time</label>
+              <select id="defaultReminderSelect" class="task-select">
+                <option value="0">Same day</option>
+                <option value="1">1 day before</option>
+                <option value="2">2 days before</option>
+                <option value="3">3 days before</option>
+                <option value="7">1 week before</option>
+                <option value="off">Off</option>
+              </select>
+              <button id="saveReminderBtn" type="button" class="btn-primary">Save Reminder Default</button>
+            </div>
+
+            <button class="setting-item" id="helpBtn" type="button">Help &amp; Support</button>
+            <div id="helpPanel" class="setting-panel hidden">
+              <p class="subtle-text">FAQ: Update profile via Edit Profile, manage reminders in Notification Settings, and use Analytics page for exports.</p>
+            </div>
+
+            <button class="setting-item danger" id="logoutBtn" type="button">Log Out</button>
+          </section>
+        </article>
+      </section>
+      <nav class="bottom-nav">
+        <a class="bottom-nav-item" data-path="/dashboard" href="/dashboard">Home</a>
+        <a class="bottom-nav-item" data-path="/tasks" href="/tasks">Tasks</a>
+        <a class="bottom-nav-item" data-path="/log" href="/log" aria-label="Log">Log</a>
+        <a class="bottom-nav-item" data-path="/analytics" href="/analytics">Analytics</a>
+        <a class="bottom-nav-item active" data-path="/profile" href="/profile">Profile</a>
+      </nav>
+      </div>
+    </main>
+    <script src="../static/js/runtime-env.js"></script>
+    <script src="../static/js/auth-gate.js"></script>
+    <script src="../static/js/profile.js"></script>
+    <script src="../static/js/bottom-nav.js"></script>
+  </body>
+</html>

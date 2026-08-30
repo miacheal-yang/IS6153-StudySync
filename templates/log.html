@@ -1,0 +1,86 @@
+{% from "partials/topbar.html" import shared_topbar %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Logs | StudyTrackr</title>
+    <link rel="stylesheet" href="../static/css/style.css?v=studytrackr-ui-20260416" />
+  </head>
+  <body>
+    <main class="dashboard-page log-page">
+      <div class="app-frame">
+      <section class="dashboard-shell log-shell">
+        {% call shared_topbar() %}
+          <p class="app-page-subtitle">Log study session</p>
+        {% endcall %}
+
+        <article class="panel log-form-panel">
+          <form id="logForm" novalidate>
+          <p id="logSuccess" class="log-success hidden"></p>
+          <p id="logError" class="error-text"></p>
+
+          <label for="subjectSelect" class="log-form-label">Subject</label>
+          <select id="subjectSelect" class="log-form-select" required>
+            <option value="">Loading subjects...</option>
+          </select>
+
+          <div class="log-duration-row">
+            <div class="duration-box">
+              <label for="hoursInput" class="log-form-label">Hours</label>
+              <input id="hoursInput" class="log-form-input" type="number" min="0" max="12" step="1" value="1" />
+            </div>
+            <div class="duration-box">
+              <label for="minutesSelect" class="log-form-label">Minutes</label>
+              <select id="minutesSelect" class="log-form-select">
+                <option value="0">0</option>
+                <option value="5">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30" selected>30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+              </select>
+            </div>
+          </div>
+
+          <label for="dateTimeInput" class="log-form-label">Date &amp; time</label>
+          <input id="dateTimeInput" class="log-form-input" type="datetime-local" />
+
+          <label class="log-form-label">Efficiency (1-5)</label>
+          <div class="log-star-row" role="radiogroup" aria-label="Efficiency rating">
+            <button type="button" class="log-star-btn active" data-rating="1" aria-pressed="true">★</button>
+            <button type="button" class="log-star-btn active" data-rating="2" aria-pressed="true">★</button>
+            <button type="button" class="log-star-btn active" data-rating="3" aria-pressed="true">★</button>
+            <button type="button" class="log-star-btn active" data-rating="4" aria-pressed="true">★</button>
+            <button type="button" class="log-star-btn" data-rating="5" aria-pressed="false">☆</button>
+          </div>
+
+          <label for="noteInput" class="log-form-label">Notes (optional)</label>
+          <textarea id="noteInput" class="log-form-textarea" rows="4" placeholder="How did it go?"></textarea>
+
+          <button id="saveEntryBtn" type="submit" class="log-save-btn">Save Session</button>
+          </form>
+        </article>
+      </section>
+      <nav class="bottom-nav">
+        <a class="bottom-nav-item" data-path="/dashboard" href="/dashboard">Home</a>
+        <a class="bottom-nav-item" data-path="/tasks" href="/tasks">Tasks</a>
+        <a class="bottom-nav-item active" data-path="/log" href="/log" aria-label="Log">Log</a>
+        <a class="bottom-nav-item" data-path="/analytics" href="/analytics">Analytics</a>
+        <a class="bottom-nav-item" data-path="/profile" href="/profile">Profile</a>
+      </nav>
+      </div>
+    </main>
+
+    <script src="../static/js/runtime-env.js"></script>
+    <script src="../static/js/auth-gate.js"></script>
+    <script src="../static/js/log.js"></script>
+    <script src="../static/js/bottom-nav.js"></script>
+  </body>
+</html>

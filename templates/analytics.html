@@ -1,0 +1,61 @@
+{% from "partials/topbar.html" import shared_topbar %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analytics | StudyTrackr</title>
+    <link rel="stylesheet" href="../static/css/style.css?v=studytrackr-ui-20260416" />
+  </head>
+  <body>
+    <main class="dashboard-page">
+      <div class="app-frame">
+      <section class="dashboard-shell analytics-shell">
+        {% call shared_topbar() %}
+          <p class="app-page-subtitle">Analytics (Premium)</p>
+        {% endcall %}
+
+        <article class="panel analytics-panel">
+          <section class="analytics-block">
+            <h2 class="analytics-title">Study hours by subject</h2>
+            <div id="analyticsSubjectList" class="analytics-subject-list"></div>
+            <p id="analyticsSubjectEmpty" class="subtle-text hidden">No study logs yet.</p>
+          </section>
+
+          <section class="analytics-block">
+            <h2 class="analytics-title">Task completion rate</h2>
+            <div id="analyticsTaskBars" class="analytics-task-bars" aria-label="Task completion rate chart"></div>
+            <p id="analyticsTaskMeta" class="analytics-task-meta subtle-text"></p>
+          </section>
+
+          <section class="analytics-block">
+            <h2 class="analytics-title">Most productive day</h2>
+            <div id="analyticsDayList" class="analytics-day-list" aria-label="Most productive day"></div>
+            <p id="analyticsDayMeta" class="analytics-day-meta subtle-text"></p>
+          </section>
+
+          <section class="analytics-block">
+            <h2 class="analytics-title">Data export</h2>
+            <div class="export-actions analytics-export-actions">
+              <button id="analyticsExportCsvBtn" type="button" class="btn-light">Export CSV</button>
+              <button id="analyticsExportPdfBtn" type="button" class="btn-light">Export PDF</button>
+            </div>
+            <p id="analyticsExportMsg" class="subtle-text"></p>
+          </section>
+        </article>
+      </section>
+      <nav class="bottom-nav">
+        <a class="bottom-nav-item" data-path="/dashboard" href="/dashboard">Home</a>
+        <a class="bottom-nav-item" data-path="/tasks" href="/tasks">Tasks</a>
+        <a class="bottom-nav-item" data-path="/log" href="/log" aria-label="Log">Log</a>
+        <a class="bottom-nav-item active" data-path="/analytics" href="/analytics">Analytics</a>
+        <a class="bottom-nav-item" data-path="/profile" href="/profile">Profile</a>
+      </nav>
+      </div>
+    </main>
+    <script src="../static/js/runtime-env.js"></script>
+    <script src="../static/js/auth-gate.js"></script>
+    <script src="../static/js/analytics.js"></script>
+    <script src="../static/js/bottom-nav.js"></script>
+  </body>
+</html>

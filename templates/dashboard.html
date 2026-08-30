@@ -1,0 +1,70 @@
+{% from "partials/topbar.html" import shared_topbar %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | StudyTrackr</title>
+    <link rel="stylesheet" href="../static/css/style.css?v=studytrackr-ui-20260416" />
+  </head>
+  <body>
+    <main class="dashboard-page">
+      <div class="app-frame">
+      <section class="dashboard-shell">
+        {% call shared_topbar() %}
+          <p id="dashboardGreeting" class="app-page-subtitle">Hi</p>
+        {% endcall %}
+
+        <section class="panel dashboard-mock-card">
+          <h2 class="dashboard-mock-title">Work pressure</h2>
+          <div class="pressure-wrap">
+            <input id="pressureRange" class="pressure-range" type="range" min="0" max="100" value="20" disabled />
+            <div class="pressure-labels">
+              <span>Low</span>
+              <span>Medium</span>
+              <span>High</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel dashboard-mock-card">
+          <h2 class="dashboard-mock-title">Upcoming deadlines</h2>
+          <div id="upcomingDeadlineList" class="dashboard-deadline-list"></div>
+          <p id="upcomingEmpty" class="subtle-text hidden">No upcoming deadlines.</p>
+        </section>
+
+        <section class="dashboard-reco-box">
+          <p class="dashboard-reco-title">Smart Recommendation</p>
+          <p id="smartRecommendationText" class="dashboard-reco-text">No study logged recently.</p>
+        </section>
+
+        <a class="dashboard-quick-log-btn" data-path="/log" href="/log">+Quick Log</a>
+        <div class="dashboard-global-toggle-row">
+          <span>Global notifications</span>
+          <button
+            id="dashboardGlobalNotificationsToggle"
+            type="button"
+            class="toggle-switch"
+            role="switch"
+            aria-checked="false"
+          >
+            <span class="toggle-knob"></span>
+          </button>
+        </div>
+      </section>
+      <nav class="bottom-nav">
+        <a class="bottom-nav-item active" data-path="/dashboard" href="/dashboard">Home</a>
+        <a class="bottom-nav-item" data-path="/tasks" href="/tasks">Tasks</a>
+        <a class="bottom-nav-item" data-path="/log" href="/log" aria-label="Log">Log</a>
+        <a class="bottom-nav-item" data-path="/analytics" href="/analytics">Analytics</a>
+        <a class="bottom-nav-item" data-path="/profile" href="/profile">Profile</a>
+      </nav>
+      </div>
+    </main>
+
+    <script src="../static/js/runtime-env.js"></script>
+    <script src="../static/js/auth-gate.js"></script>
+    <script src="../static/js/dashboard.js"></script>
+    <script src="../static/js/bottom-nav.js"></script>
+  </body>
+</html>

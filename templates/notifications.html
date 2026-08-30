@@ -1,0 +1,70 @@
+{% from "partials/topbar.html" import shared_topbar %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notifications | StudyTrackr</title>
+    <link rel="stylesheet" href="../static/css/style.css?v=studytrackr-ui-20260416" />
+  </head>
+  <body>
+    <main class="dashboard-page">
+      <div class="app-frame">
+      <section class="dashboard-shell">
+        {% call shared_topbar() %}
+          <p class="app-page-subtitle">Notifications</p>
+        {% endcall %}
+
+        <article class="panel">
+          <h1>Notification Center</h1>
+          <div id="notificationList" class="upcoming-list"></div>
+          <p id="notificationEmpty" class="subtle-text hidden">No notifications.</p>
+          <a id="backDashboardLink" href="/dashboard" class="btn-light" style="display: inline-block; text-decoration: none"
+            >Back to Dashboard</a
+          >
+        </article>
+      </section>
+      <nav class="bottom-nav">
+        <a class="bottom-nav-item active" data-path="/dashboard" href="/dashboard">Home</a>
+        <a class="bottom-nav-item" data-path="/tasks" href="/tasks">Tasks</a>
+        <a class="bottom-nav-item" data-path="/log" href="/log" aria-label="Log">Log</a>
+        <a class="bottom-nav-item" data-path="/analytics" href="/analytics">Analytics</a>
+        <a class="bottom-nav-item" data-path="/profile" href="/profile">Profile</a>
+      </nav>
+      </div>
+    </main>
+    <script src="../static/js/runtime-env.js"></script>
+    <script src="../static/js/auth-gate.js"></script>
+    <script src="../static/js/bottom-nav.js"></script>
+    <script>
+      const ENV = window.StudySyncEnv || {};
+      const list = document.getElementById("notificationList");
+      const empty = document.getElementById("notificationEmpty");
+      const backDashboardLink = document.getElementById("backDashboardLink");
+
+      if (ENV.IS_PREVIEW && typeof ENV.templateUrl === "function") {
+        backDashboardLink.href = ENV.templateUrl("/dashboard");
+      }
+
+      const requestUrl = typeof ENV.apiUrl === "function" ? ENV.apiUrl("/api/notifications") : "/api/notifications";
+      fetch(requestUrl, { credentials: "include" })
+        .then((res) => res.json())
+        .then((data) => {
+          const items = data.notifications || [];
+          if (!items.length) {
+            empty.classList.remove("hidden");
+            return;
+          }
+          items.forEach((item) => {
+            const row = document.createElement("div");
+            row.className = "upcoming-item";
+            row.innerHTML = `<div class="upcoming-main"><p class="upcoming-title">${item.title || "Notification"}</p><p class="upcoming-meta">${item.message || ""}</p></div>`;
+            list.appendChild(row);
+          });
+        })
+        .catch(() => {
+          empty.classList.remove("hidden");
+        });
+    </script>
+  </body>
+</html>

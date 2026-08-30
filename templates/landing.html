@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudySync | Landing</title>
+    <link rel="stylesheet" href="../static/css/style.css?v=studytrackr-ui-20260416" />
+  </head>
+  <body>
+    <main class="home-page">
+      <section class="home-card">
+        <header class="home-header app-shared-topbar">
+          <img src="../static/images/log.jpeg" alt="StudySync logo" class="home-logo" />
+          <div class="home-title-wrap">
+            <h1 class="home-brand">StudySync</h1>
+          <p class="home-tagline">See your workload before it sees you..</p>
+          </div>
+        </header>
+
+        <section class="home-hero">
+          <h2>Smart Academic Planner</h2>
+          <p>for university students</p>
+          <ul class="home-features">
+            <li>Centralise all your deadlines</li>
+            <li>Track study sessions</li>
+            <li>Get smart recommendations</li>
+          </ul>
+        </section>
+
+        <section class="home-actions">
+          <a class="home-btn home-btn-primary" href="/login" data-path="/login">Login</a>
+          <a class="home-btn home-btn-secondary" href="/register" data-path="/register">Register</a>
+        </section>
+      </section>
+    </main>
+    <script src="../static/js/runtime-env.js"></script>
+    <script>
+      const ENV = window.StudySyncEnv || {};
+      const navButtons = document.querySelectorAll(".home-actions .home-btn");
+
+      function toPage(path) {
+        if (typeof ENV.toPage === "function") {
+          ENV.toPage(path);
+        } else {
+          window.location.href = path;
+        }
+      }
+
+      navButtons.forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.preventDefault();
+          const path = button.dataset.path || "/login";
+          toPage(path);
+        });
+      });
+    </script>
+  </body>
+</html>

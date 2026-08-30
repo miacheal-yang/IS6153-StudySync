@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | StudyTrackr</title>
+    <link rel="stylesheet" href="../static/css/style.css?v=studytrackr-ui-20260416" />
+  </head>
+  <body>
+    <main class="auth-page">
+      <section class="auth-card">
+        <header class="home-header app-shared-topbar">
+          <img src="../static/images/log.jpeg" alt="StudySync logo" class="home-logo" />
+          <div class="home-title-wrap">
+            <h1 class="home-brand">StudySync</h1>
+          <p id="authModeTitle" class="auth-mode-title">Register</p>
+          </div>
+        </header>
+
+        <p id="formError" class="error-text" role="alert"></p>
+
+        <form id="loginForm" class="hidden" novalidate>
+          <label for="loginEmail">Email</label>
+          <input id="loginEmail" name="email" type="email" placeholder="enter your email address" required />
+
+          <label for="loginPassword">Password</label>
+          <input id="loginPassword" name="password" type="password" placeholder="************" required />
+
+          <button type="submit">Login</button>
+          <a id="forgotPasswordLink" class="auth-inline-link hidden" href="#">Forgot Password?</a>
+        </form>
+
+        <form id="registerForm" novalidate>
+          <label for="registerName">Full Name</label>
+          <input id="registerName" name="full_name" type="text" required />
+
+          <label for="registerEmail">Email</label>
+          <input id="registerEmail" name="email" type="email" placeholder="you@example.com" required />
+
+          <label for="registerPassword">Password</label>
+          <input id="registerPassword" name="password" type="password" required />
+
+          <label for="registerConfirmPassword">Confirm Password</label>
+          <input id="registerConfirmPassword" name="confirm_password" type="password" required />
+
+          <label for="registerMajor">Major</label>
+          <input id="registerMajor" name="major" type="text" required />
+
+          <label for="registerSemester">Semester</label>
+          <input id="registerSemester" name="semester" type="text" placeholder="e.g. Spring 2026" required />
+
+          <button type="submit">Register</button>
+        </form>
+
+        <p id="switchText" class="switch-row auth-switch-row">
+          <span id="switchLeadText">Already have an account?</span>
+          <a href="#" id="switchLink">Login here</a>
+        </p>
+      </section>
+    </main>
+
+    <script src="../static/js/runtime-env.js"></script>
+    <script>
+      const ENV = window.StudySyncEnv || {};
+      const IS_PREVIEW = Boolean(ENV.IS_PREVIEW);
+      const loginForm = document.getElementById("loginForm");
+      const registerForm = document.getElementById("registerForm");
+      const switchLeadText = document.getElementById("switchLeadText");
+      const switchLink = document.getElementById("switchLink");
+      const authModeTitle = document.getElementById("authModeTitle");
+      const forgotPasswordLink = document.getElementById("forgotPasswordLink");
+      const formError = document.getElementById("formError");
+      let mode = "register";
+
+      function setError(message) {
+        formError.textContent = message || "";
+      }
+
+      function isValidEmail(email) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      }
+
+      function apiUrl(path) {
+        return typeof ENV.apiUrl === "function" ? ENV.apiUrl(path) : path;
+      }
+
+      function toPage(path) {
+        if (typeof ENV.toPage === "function") {
+          ENV.toPage(path);
+        } else {
+          window.location.href = path;
+        }
+      }
+
+      function toggleMode(nextMode) {
+        mode = nextMode;
+        setError("");
+        if (mode === "login") {
+          loginForm.classList.remove("hidden");
+          registerForm.classList.add("hidden");
+          authModeTitle.textContent = "Login";
+          forgotPasswordLink.classList.remove("hidden");
+          switchLeadText.textContent = "Don't have an account?";
+          switchLink.textContent = "Register here";
+        } else {
+          registerForm.classList.remove("hidden");
+          loginForm.classList.add("hidden");
+          authModeTitle.textContent = "Register";
+          forgotPasswordLink.classList.add("hidden");
+          switchLeadText.textContent = "Already have an account?";
+          switchLink.textContent = "Login here";
+        }
+      }
+
+      async function requestJson(url, payload) {
+        try {
+          const primaryUrl = apiUrl(url);
+          const fallbackUrls = IS_PREVIEW
+            ? [primaryUrl, `http://localhost:5000${url}`, `http://127.0.0.1:5000${url}`]
+            : [primaryUrl];
+
+          let lastError = null;
+          for (const endpoint of [...new Set(fallbackUrls)]) {
+            try {
+              const res = await fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify(payload),
+              });
+              const data = await res.json().catch(() => ({}));
+              if (!res.ok) {
+                if (url === "/api/auth/login" && res.status === 401) {
+                  throw new Error("Account not found. Please register first, or check your email and password.");
+                }
+                throw new Error(data.error || "Request failed. Please try again later.");
+              }
+              return data;
+            } catch (err) {
+              const isNetworkError =
+                err instanceof TypeError || /failed to fetch/i.test(String(err?.message || ""));
+              if (!isNetworkError) {
+                throw err;
+              }
+              lastError = err;
+            }
+          }
+          throw lastError || new Error("Network connection failed. Please check whether the service is running.");
+        } catch (error) {
+          if (error instanceof Error && error.message) {
+            if (/failed to fetch/i.test(error.message)) {
+              throw new Error(
+                IS_PREVIEW
+                  ? "Network connection failed. Please ensure the backend service is running (http://localhost:5000 or http://127.0.0.1:5000)."
+                  : "Network connection failed. Please check whether the service is running."
+              );
+            }
+            throw error;
+          }
+          if (url === "/api/auth/login") {
+            throw new Error("Account not found. Please register first, or check your email and password.");
+          }
+          throw new Error("Network connection failed. Please check whether the service is running.");
+        }
+      }
+
+      switchLink.addEventListener("click", (event) => {
+        event.preventDefault();
+        toggleMode(mode === "login" ? "register" : "login");
+      });
+
+      toggleMode("register");
+
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        setError("");
+        const email = loginForm.email.value.trim();
+        const password = loginForm.password.value.trim();
+
+        if (!isValidEmail(email)) {
+          setError("Please enter a valid email address.");
+          return;
+        }
+        if (!password) {
+          setError("Password is required.");
+          return;
+        }
+
+        try {
+          await requestJson("/api/auth/login", { email, password });
+          toPage("/dashboard");
+        } catch (err) {
+          setError(err.message);
+        }
+      });
+
+      registerForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        setError("");
+        const full_name = registerForm.full_name.value.trim();
+        const email = registerForm.email.value.trim();
+        const password = registerForm.password.value;
+        const confirmPassword = registerForm.confirm_password.value;
+        const major = registerForm.major.value.trim();
+        const semester = registerForm.semester.value.trim();
+
+        if (!isValidEmail(email)) {
+          setError("Please enter a valid email address.");
+          return;
+        }
+        if (!password) {
+          setError("Password is required.");
+          return;
+        }
+        if (password !== confirmPassword) {
+          setError("Passwords do not match.");
+          return;
+        }
+
+        try {
+          await requestJson("/api/auth/register", {
+            full_name,
+            email,
+            password,
+            major,
+            semester,
+          });
+          toPage("/dashboard");
+        } catch (err) {
+          setError(err.message);
+        }
+      });
+    </script>
+  </body>
+</html>
