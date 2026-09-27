@@ -1,14 +1,1 @@
-[
-  {
-    "id": "u001",
-    "name": "Mike",
-    "email": "ltyp1004@gg.com",
-    "passwordHash": "scrypt:32768:8:1$bQXoT03EfhVmaISS$a9cd1ccf01b416bb4f79146909f0ebef98ba65aea97c9326670136d906fef3502339d56784944cf0be492c2de7a790b11a97ee9decfbf18f6fab18b6b25667ff",
-    "major": "information system",
-    "semester": "2026",
-    "avatarUrl": "",
-    "defaultReminder": "0",
-    "subjects": [],
-    "tier": "free"
-  }
-]
+
