@@ -1,22 +1,149 @@
-# IS6153-StudySync
+# 🌟 **IS6153 — StudySync (Professional README for International Job Applications)**
 
-what is StudySync?
-StudySync is a client-side mobile web application. For rapid prototyping and demonstration, the entire application runs in the browser. All user data is stored locally using localStorage, eliminating the need for a backend server. This allows for fast deployment and simplifies the development and demo process. For the final production version, the architecture will transition to a full-stack model. All user data will be persisted securely in a remote database, moving away from local browser storage. An optional smart recommendation feature for Premium-tier users is powered by the Anthropic API (Claude). The API calls are made directly from the client to generate personalized insights.
+## 📱 Overview
+**StudySync is a lightweight, client-side mobile web application designed for rapid prototyping and demonstration.**  
+The entire system runs fully in the browser, with all user data stored locally via `localStorage`  [Current page](citation-section://1421309710/5).  
+This architecture enables:
 
-# screenshot
-<img width="968" height="1618" alt="image" src="https://github.com/user-attachments/assets/60f73999-3aec-4520-84a3-bccef3d209dd" />
-<img width="916" height="1375" alt="image" src="https://github.com/user-attachments/assets/f07566c0-792c-4580-a629-bbf9773babca" /> # add task
-<img width="925" height="1580" alt="image" src="https://github.com/user-attachments/assets/de7c6618-31fb-467a-9a00-c9d675df200d" />
-<img width="938" height="1620" alt="image" src="https://github.com/user-attachments/assets/afbf7784-eda0-455e-af95-11928d7ca93f" />
-<img width="955" height="1613" alt="image" src="https://github.com/user-attachments/assets/0f003e10-c11a-48dd-bba7-3215725cb66a" />
-<img width="981" height="1608" alt="image" src="https://github.com/user-attachments/assets/25f364d0-e2e4-415c-8fee-cd378b5f1a37" />
+- Zero backend dependencies  
+- Instant deployment  
+- Simplified demo and testing workflows  
 
-# The system follows a three-layer client-centric architecture:
-Layer	Technology	Responsibility
-Presentation Layer	HTML / CSS / JavaScript 	Renders all UI screens, handles user interactions, navigation between pages
-Application Logic Layer	Python	Processes data, enforces business rules, manages state, calls external APIs
-Data Layer	Browser localStorage	Persists user profile, tasks, study logs, settings, and notification preferences
+A future production version will transition to a **full-stack architecture**, where user data is securely persisted in a remote database instead of browser storage  [Current page](citation-section://1421309710/8).
 
+Premium-tier users can access an optional **AI-powered smart recommendation feature**, implemented using the **Anthropic Claude API**, called directly from the client to generate personalized insights  [Current page](citation-section://1421309710/9).
 
+---
 
+# 🚀 Key Features
 
+### **1. Fully Client-Side Execution**
+- Runs entirely in the browser  
+- No backend server required  
+- Data stored using `localStorage`  
+- Ideal for rapid prototyping and classroom demos  
+
+### **2. AI-Powered Study Recommendations (Premium)**
+- Integrates **Anthropic Claude API**  
+- Generates personalized study insights based on tasks and logs  
+- API requests made directly from the client  
+
+### **3. Production-Ready Architecture Roadmap**
+- Planned migration to a full-stack model  
+- Secure remote database storage  
+- Scalable backend integration  
+
+---
+
+# 🧱 High-Level Architecture
+
+StudySync follows a **three-layer client-centric architecture**  [Current page](citation-section://1421309710/20):
+
+| Layer | Technology | Responsibility |
+|-------|------------|----------------|
+| **Presentation Layer** | HTML / CSS / JavaScript | UI rendering, user interaction, page navigation |
+| **Application Logic Layer** | Python | Data processing, business rules, state management, external API calls |
+| **Data Layer** | Browser `localStorage` | Persists user profile, tasks, study logs, settings, notification preferences |
+
+---
+
+## 🔌 External Integrations
+
+| Service | Purpose | Tier |
+|---------|---------|------|
+| **Anthropic API (Claude)** | Personalized study recommendations | Premium |
+| **Browser Notification API** | In-app reminders for deadlines | Free & Premium |
+| **File Save API** | Export study data (CSV / PDF) | Premium |
+
+---
+
+# 🧩 Architectural Style
+
+StudySync adopts a **Component-Based Architecture**, where the UI is composed of modular, reusable components such as:
+
+- `TaskCard`  
+- `LogEntry`  
+- `SummaryWidget`  
+- `NotificationBanner`  
+- `StatCard`
+
+### Benefits
+- **Separation of concerns** — each component manages its own display logic  
+- **Reusability** — shared components across multiple pages  
+- **Maintainability** — components can be updated or tested independently  
+- **Scalability** — backend integration can be added without redesigning the UI layer  
+
+### State Management
+A lightweight centralized store (JavaScript object) synchronizes with `localStorage`, ensuring persistence across browser sessions.
+
+---
+
+# 📸 Screenshots
+
+### **Main Interface**
+```html
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/60f73999-3aec-4520-84a3-bccef3d209dd" width="45%">
+  <img src="https://github.com/user-attachments/assets/f07566c0-792c-4580-a629-bbf9773babca" width="45%">
+</p>
+```
+
+### **Task Management Flow**
+```html
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/de7c6618-31fb-467a-9a00-c9d675df200d" width="30%">
+  <img src="https://github.com/user-attachments/assets/afbf7784-eda0-455e-af95-11928d7ca93f" width="30%">
+  <img src="https://github.com/user-attachments/assets/0f003e10-c11a-48dd-bba7-3215725cb66a" width="30%">
+</p>
+```
+
+---
+
+# 🛠 Tech Stack
+
+- **Frontend:** HTML / CSS / JavaScript  
+- **Logic:** Python  
+- **Storage:** Browser `localStorage`  
+- **AI:** Anthropic Claude API  
+- **Deployment:** GitHub Pages  
+
+---
+
+# 📦 Getting Started
+
+### **1. Clone the Repository**
+```bash
+git clone https://github.com/miacheal-yang/IS6153-StudySync.git
+```
+
+### **2. Run the Application**
+Simply open `index.html` in your browser — no backend required.
+
+---
+
+# 🧪 AI Recommendation Example (Claude API)
+
+```python
+def get_recommendation(user_profile):
+    payload = {
+        "model": "claude-3-sonnet",
+        "prompt": f"Generate study advice for: {user_profile}"
+    }
+    return requests.post(API_URL, json=payload).json()
+```
+
+---
+
+# 🎯 Project Goals
+
+- Deliver a functional mobile learning prototype  
+- Demonstrate front-end architecture skills  
+- Showcase AI API integration  
+- Provide a foundation for future full-stack expansion  
+
+---
+
+# 👤 Author
+
+**Peng Yang — University College Cork (MSc Information Systems for Business Performance)**  
+Focus areas: Python, BI, Systems Analysis, AI Application Development, Mobile Prototyping.
