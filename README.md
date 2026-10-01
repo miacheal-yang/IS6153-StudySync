@@ -1,4 +1,4 @@
-# 🌟 **IS6153 — StudySync (Professional README for International Job Applications)**
+# 🌟 **IS6153 — StudySync
 
 ## 📱 Overview
 **StudySync is a lightweight, client-side mobile web application designed for rapid prototyping and demonstration.**  
@@ -115,9 +115,6 @@ A lightweight centralized store (JavaScript object) synchronizes with `localStor
 ```bash
 git clone https://github.com/miacheal-yang/IS6153-StudySync.git
 ```
-
-### **2. Run the Application**
-Simply open `index.html` in your browser — no backend required.
 
 ---
 
