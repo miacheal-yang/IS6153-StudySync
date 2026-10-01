@@ -100,7 +100,7 @@ A lightweight centralized store (JavaScript object) synchronizes with `localStor
 ### **Profile**
 ```html
 <p align="center">
-  <img src="https://raw.githubusercontent.com/miacheal-yang/IS6153-StudySync/main/images/profile.png" width="40%">
+  <img src="https://raw.githubusercontent.com/miacheal-yang/IS6153-StudySync/blob/main/images/profile.png" width="40%">
 </p>
 ```
 ---
