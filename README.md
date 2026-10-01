@@ -83,20 +83,26 @@ A lightweight centralized store (JavaScript object) synchronizes with `localStor
 ### **Main Interface**
 ```html
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/60f73999-3aec-4520-84a3-bccef3d209dd" width="45%">
-  <img src="https://github.com/user-attachments/assets/f07566c0-792c-4580-a629-bbf9773babca" width="45%">
+  <img src="https://raw.githubusercontent.com/miacheal-yang/IS6153-StudySync/main/images/home.png" width="45%">
+  <img src="https://raw.githubusercontent.com/miacheal-yang/IS6153-StudySync/main/images/task.png" width="45%">
 </p>
 ```
 
 ### **Task Management Flow**
 ```html
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/de7c6618-31fb-467a-9a00-c9d675df200d" width="30%">
-  <img src="https://github.com/user-attachments/assets/afbf7784-eda0-455e-af95-11928d7ca93f" width="30%">
-  <img src="https://github.com/user-attachments/assets/0f003e10-c11a-48dd-bba7-3215725cb66a" width="30%">
+  <img src="https://raw.githubusercontent.com/miacheal-yang/IS6153-StudySync/main/images/add%20task.png" width="30%">
+  <img src="https://raw.githubusercontent.com/miacheal-yang/IS6153-StudySync/main/images/log.png" width="30%">
+  <img src="https://raw.githubusercontent.com/miacheal-yang/IS6153-StudySync/main/images/analytics.png" width="30%">
 </p>
 ```
 
+### **Profile**
+```html
+<p align="center">
+  <img src="https://raw.githubusercontent.com/miacheal-yang/IS6153-StudySync/main/images/profile.png" width="40%">
+</p>
+```
 ---
 
 # 🛠 Tech Stack
