@@ -1,4 +1,4 @@
-# 🌟 **IS6153 — StudySync
+# 🌟 IS6153 — StudySync
 
 ## 📱 Overview
 **StudySync is a lightweight, client-side mobile web application designed for rapid prototyping and demonstration.**  
