@@ -81,7 +81,10 @@ A lightweight centralized store (JavaScript object) synchronizes with `localStor
 # 📸 Screenshots
 
 ### **Main Interface**
-![home](images/home.png)
+()
+<div align="center">
+  ![home]<img src="images/home.png" alt="home" width="80%">
+</div>
 ```html
 <img src="images/home.png" width="100">
 <p align="center">
