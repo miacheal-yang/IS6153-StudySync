@@ -82,7 +82,7 @@ A lightweight centralized store (JavaScript object) synchronizes with `localStor
 
 ### **Main Interface**
 ```html
-<img src="images/architecture.png" width="100">
+<img src="images/home.png" width="100">
 <p align="center">
   <img src="https://raw.githubusercontent.com/miacheal-yang/IS6153-StudySync/main/images/home.png" width="45%">
   
