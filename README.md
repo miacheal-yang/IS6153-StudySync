@@ -89,9 +89,9 @@ A lightweight centralized store (JavaScript object) synchronizes with `localStor
 
 ### **Task Management Flow**
 ```html
-<p align="center">
+<div align="center">
   ![StudySync Log Screen](https://raw.githubusercontent.com/miacheal-yang/IS6153-StudySync/main/images/log.png)
-</p>
+</div>
 ```
 
 ### **Profile**
