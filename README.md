@@ -89,9 +89,9 @@ A lightweight centralized store (JavaScript object) synchronizes with `localStor
 ### **Core Features Flow**
 <p align="center">
   <img src="images/add task.png" alt="Add Task" width="32%" style="margin-right: 2%;">
-  <img src="images/task.png" alt="Task" width="32%" style="margin-right: 2%;">
-  <img src="images/log.png" alt="task" width="32%;">
-  <img src="images/Analytics.png" alt="Analytics" width="32%;">
+  <img src="images/tasks.png" alt="Tasks" width="32%" style="margin-right: 2%;">
+  <img src="images/log.png" alt="Log" width="32%;">
+  <img src="images/analytics.png" alt="Analytics" width="32%;">
   
 </p>
 
