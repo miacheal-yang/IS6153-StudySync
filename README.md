@@ -88,7 +88,6 @@ A lightweight centralized store (JavaScript object) synchronizes with `localStor
 
 ### **Core Features Flow**
 <p align="center">
-  <img src="images/add task.png" alt="Add Task" width="32%" style="margin-right: 2%;">
   <img src="images/tasks.png" alt="Tasks" width="32%" style="margin-right: 2%;">
   <img src="images/log.png" alt="Log" width="32%;">
   <img src="images/analytics.png" alt="Analytics" width="32%;">
@@ -110,25 +109,17 @@ A lightweight centralized store (JavaScript object) synchronizes with `localStor
 # 📦 Getting Started
 
 ### **1. Clone the Repository**
-```bash
 git clone https://github.com/miacheal-yang/IS6153-StudySync.git
-```
-
-### **2. Run the Application**
-Simply open `index.html` in your browser — no backend required.
 
 ---
 
 # 🧪 AI Recommendation Example (Claude API)
-
-```python
 def get_recommendation(user_profile):
     payload = {
         "model": "claude-3-sonnet",
         "prompt": f"Generate study advice for: {user_profile}"
     }
     return requests.post(API_URL, json=payload).json()
-```
 
 ---
 
