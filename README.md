@@ -9,9 +9,9 @@ This architecture enables:
 - Instant deployment  
 - Simplified demo and testing workflows  
 
-A future production version will transition to a **full-stack architecture**, where user data is securely persisted in a remote database instead of browser storage  [Current page](citation-section[...]
+A future production version will transition to a **full-stack architecture**, where user data is securely persisted in a remote database instead of browser storage.
 
-Premium-tier users can access an optional **AI-powered smart recommendation feature**, implemented using the **Anthropic Claude API**, called directly from the client to generate personalized insi[...]
+Premium-tier users can access an optional **AI-powered smart recommendation feature**, implemented using the **Anthropic Claude API**, called directly from the client to generate personalized insights.
 
 ---
 
@@ -37,7 +37,7 @@ Premium-tier users can access an optional **AI-powered smart recommendation feat
 
 # 🧱 High-Level Architecture
 
-StudySync follows a **three-layer client-centric architecture**  [Current page](citation-section://1421309710/20):
+StudySync follows a **three-layer client-centric architecture**:
 
 | Layer | Technology | Responsibility |
 |-------|------------|----------------|
@@ -82,15 +82,17 @@ A lightweight centralized store (JavaScript object) synchronizes with `localStor
 
 ### **Home Screen & Profile**
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/60f73999-3aec-4520-84a3-bccef3d209dd" alt="Home Screen" width="48%" style="margin-right: 2%;">
-  <img src="https://github.com/user-attachments/assets/f07566c0-792c-4580-a629-bbf9773babca" alt="Profile" width="48%;">
+  <img src="images/home.png" alt="Home Screen" width="48%" style="margin-right: 2%;">
+  <img src="images/profile.png" alt="Profile" width="48%;">
 </p>
 
 ### **Core Features Flow**
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/de7c6618-31fb-467a-9a00-c9d675df200d" alt="Add Task" width="32%" style="margin-right: 2%;">
-  <img src="https://github.com/user-attachments/assets/afbf7784-eda0-455e-af95-11928d7ca93f" alt="Task Log" width="32%" style="margin-right: 2%;">
-  <img src="https://github.com/user-attachments/assets/0f003e10-c11a-48dd-bba7-3215725cb66a" alt="Analytics" width="32%;">
+  <img src="images/add task.png" alt="Add Task" width="32%" style="margin-right: 2%;">
+  <img src="images/task.png" alt="Task" width="32%" style="margin-right: 2%;">
+  <img src="images/log.png" alt="task" width="32%;">
+  <img src="images/Analytics.png" alt="Analytics" width="32%;">
+  
 </p>
 
 ---
