@@ -135,4 +135,4 @@ def get_recommendation(user_profile):
 # 👤 Author
 
 **Peng Yang — University College Cork (MSc Information Systems for Business Performance)**  
-Focus areas: Python, BI, Systems Analysis, AI Application Development, Mobile Prototyping.
+Focus areas: Python, BI, Systems Analysis, AI Application Development, data analysis.
