@@ -81,17 +81,11 @@ A lightweight centralized store (JavaScript object) synchronizes with `localStor
 # 📸 Screenshots
 
 ### **Main Interface**
-()
-<div align="center">
-  ![home]<img src="images/home.png" alt="home" width="80%">
-</div>
 ```html
-<img src="images/home.png" width="100">
-<p align="center">
+<div align="center">
   <img src="https://raw.githubusercontent.com/miacheal-yang/IS6153-StudySync/main/images/home.png" width="45%">
-  
   <img src="https://raw.githubusercontent.com/miacheal-yang/IS6153-StudySync/main/images/task.png" width="45%">
-</p>
+</div>
 ```
 
 ### **Task Management Flow**
